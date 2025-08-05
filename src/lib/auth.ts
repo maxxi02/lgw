@@ -5,6 +5,7 @@ import { db } from "./database/db";
 import { nextCookies } from "better-auth/next-js";
 
 export const auth = betterAuth({
+  trustedOrigins: [process.env.NODE_ENV, "http://localhost:3000"],
   baseURL: process.env.BETTER_AUTH_URL || "http://localhost:3000",
   database: mongodbAdapter(db),
   appName: "LGW Warehouse",
