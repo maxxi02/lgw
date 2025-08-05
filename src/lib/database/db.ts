@@ -20,5 +20,5 @@ export async function connectDB() {
 }
 
 // Optional: if you need native MongoDB client
-export const client = MONGODB_URI ? new MongoClient(MONGODB_URI) : null;
+export const client = new MongoClient(MONGODB_URI);
 export const db = client?.db("lgw2");
