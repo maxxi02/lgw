@@ -2,7 +2,7 @@ import { Db, MongoClient } from "mongodb";
 import mongoose from "mongoose";
 
 export const client = new MongoClient(process.env.MONGODB_URI || "");
-export const db: Db = client.db(process.env.MONGODB_DATABASE || "");
+export const db: Db = client.db(process.env.MONGODB_URI || "");
 
 let isConnected = false;
 
