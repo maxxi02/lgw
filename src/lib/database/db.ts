@@ -1,22 +1,24 @@
-import { Db, MongoClient } from "mongodb";
+import { MongoClient } from "mongodb";
 import mongoose from "mongoose";
 
-export const client = new MongoClient(process.env.MONGODB_URI || "");
-export const db: Db = client.db("test");
+const MONGODB_URI = process.env.MONGODB_URI || "";
 
 let isConnected = false;
 
 export async function connectDB() {
-  if (isConnected) {
+  if (isConnected || !MONGODB_URI) {
     return;
   }
 
   try {
-    await mongoose.connect(process.env.MONGODB_URI || "");
+    await mongoose.connect(MONGODB_URI);
     isConnected = true;
-    console.log("MongoDB connected successfully");
+    console.log("MongoDB connected");
   } catch (error) {
     console.error("MongoDB connection failed:", error);
-    throw error;
   }
 }
+
+// Optional: if you need native MongoDB client
+export const client = MONGODB_URI ? new MongoClient(MONGODB_URI) : null;
+export const db = client?.db("lgw2");
